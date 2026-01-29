@@ -1,9 +1,7 @@
 import React from 'react'
 import Products from '../components/Products'
 
-const Home = () => {
-
-
+const Home: React.FC = () => {
     return (
         <div>
             <h2>Welcome to Redux toolkit store</h2>

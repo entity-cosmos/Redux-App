@@ -1,20 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { add } from '../store/cartSlice'
 import { STATUS, fetchProducts } from '../store/productSlice'
+import { RootState, AppDispatch } from '../store/store'
+import { Product } from '../types'
 
-const Products = () => {
-    const dispatch = useDispatch()
-    const { data: products, status } = useSelector(state => state.products)
+const Products: React.FC = () => {
+    const dispatch = useDispatch<AppDispatch>()
+    const { data: products, status } = useSelector((state: RootState) => state.products)
+    
     useEffect(() => {
         dispatch(fetchProducts())
-    }, [])
+    }, [dispatch])
 
-    const handleAdd = (product) => {
+    const handleAdd = (product: Product) => {
         dispatch(add(product))
     }
 
     if (status === STATUS.LOADING) return <h2>Loading...</h2>
+    
     return (
         <div className='productsWrapper'>
             {

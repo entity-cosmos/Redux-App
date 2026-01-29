@@ -1,13 +1,14 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { remove } from '../store/cartSlice'
+import { RootState, AppDispatch } from '../store/store'
 
-const Cart = () => {
-    const dispatch = useDispatch()
-    const products = useSelector(state => state.cart)
+const Cart: React.FC = () => {
+    const dispatch = useDispatch<AppDispatch>()
+    const products = useSelector((state: RootState) => state.cart)
 
-    const handleRemove = (product) => {
-        dispatch(remove(product))
+    const handleRemove = (productId: number) => {
+        dispatch(remove(productId))
     }
 
     return (
