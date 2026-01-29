@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { Product } from "./cartSlice";
 
 export const STATUS = Object.freeze({
     IDLE: 'idle',
@@ -6,20 +7,22 @@ export const STATUS = Object.freeze({
     LOADING: 'loading'
 })
 
+export type StatusType = typeof STATUS[keyof typeof STATUS];
+
+interface ProductState {
+    data: Product[];
+    status: StatusType;
+}
+
+const initialState: ProductState = {
+    data: [],
+    status: STATUS.IDLE,
+};
+
 const productSlice = createSlice({
     name: 'products',
-    initialState: {
-        data: [],
-        status: STATUS.IDLE,
-    },
-    reducers: {
-        // setProducts(state, action) {
-        //     state.data = action.payload;
-        // },
-        // setStatus(state, action) {
-        //     state.status = action.payload;
-        // },
-    },
+    initialState,
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(fetchProducts.pending, (state, action) => {
@@ -35,13 +38,11 @@ const productSlice = createSlice({
     }
 })
 
-export const { setProducts, setStatus } = productSlice.actions;
-
 export default productSlice.reducer;
 
 export const fetchProducts = createAsyncThunk('products/fetch', async () => {
     const res = await fetch('https://fakestoreapi.com/products');
-    const data = await res.json();
+    const data: Product[] = await res.json();
     return data;
 });
 

@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 import { Provider } from 'react-redux';
 import store from './store/store';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
       <Provider store={store}>
