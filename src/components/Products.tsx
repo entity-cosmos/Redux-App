@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { add } from '../store/cartSlice'
 import { STATUS, fetchProducts } from '../store/productSlice'
 import { RootState, AppDispatch } from '../store/store'
-import { Product } from '../store/cartSlice'
+import { Product } from '../types'
 
 const Products: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>()
